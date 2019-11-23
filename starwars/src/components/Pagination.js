@@ -21,8 +21,8 @@ const Pagination = ({ page, totalPage, setPage, setLoading }) => {
             .map((item, index) => (
               <Button
                 key={index}
-                color="primary"
-                outline={index + 1 === page ? false : true}
+                color={index + 1 === page ? "secondary" : "primary"}
+                disabled={index + 1 === page ? true : false}
                 onClick={() => {
                   setPage(index + 1);
                   setLoading(true);

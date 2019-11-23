@@ -5,8 +5,9 @@ import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import ResultAlert from "./components/ResultAlert";
 import Pagination from "./components/Pagination";
+import LoadingSpinner from "./components/LoadingSpinner";
 import Person from "./components/Person";
-import { Container, Row, Col, Spinner } from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 const App = () => {
   const [people, setPeople] = useState({});
@@ -48,15 +49,7 @@ const App = () => {
           setLoading={setLoading}
         />
         {loading ? (
-          <Row>
-            <Col xs="12">
-              <Spinner
-                type="grow"
-                color="primary"
-                style={{ width: "50px", height: "50px" }}
-              />
-            </Col>
-          </Row>
+          <LoadingSpinner />
         ) : (
           <Row>
             {people.results &&
