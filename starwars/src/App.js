@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import Header from "./components/Header";
-import Person from "./components/Person";
 import SearchBar from "./components/SearchBar";
+import ResultAlert from "./components/ResultAlert";
 import Pagination from "./components/Pagination";
-import { Container, Row, Col, Alert } from "reactstrap";
+import Person from "./components/Person";
+import { Container, Row } from "reactstrap";
 
 const App = () => {
   const [people, setPeople] = useState({});
@@ -14,6 +15,7 @@ const App = () => {
 
   const query = `https://swapi.co/api/people/?page=${page}&search=${searchTerm}`;
   const totalPage = people.count && Math.ceil(people.count / 10);
+
   const requestAPI = () => {
     axios
       .get(query)
@@ -24,34 +26,19 @@ const App = () => {
       .catch(error => console.log(error));
   };
 
-  // const searchHandler = term => setSearchTerm(term);
-
   useEffect(requestAPI, [searchTerm, page]);
 
-  console.log(totalPage);
   return (
     <div className="App">
       <Header />
       <Container>
-        <Row>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        </Row>
-        <Row>
-          <Col xs="12">
-            <Alert color="info">{people.count} characters are found.</Alert>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="12" className="mb-3">
-            <Pagination
-              totalPage={totalPage}
-              next={people.next}
-              prev={people.previous}
-              page={page}
-              setPage={setPage}
-            />
-          </Col>
-        </Row>
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          setPage={setPage}
+        />
+        <ResultAlert count={people.count} />
+        <Pagination totalPage={totalPage} page={page} setPage={setPage} />
         <Row>
           {people.results &&
             people.results.map((item, index) => (

@@ -1,20 +1,24 @@
 import React from "react";
-import { Col, FormGroup, Label, Input } from "reactstrap";
-const SearchBar = props => {
+import { Row, Col, FormGroup, Input } from "reactstrap";
+const SearchBar = ({ searchTerm, setSearchTerm, setPage }) => {
   return (
-    <Col xs="12">
-      <FormGroup>
-        <Label for="exampleSearch">Search</Label>
-        <Input
-          onChange={e => props.setSearchTerm(e.target.value)}
-          value={props.searchTerm}
-          type="search"
-          name="search"
-          id="exampleSearch"
-          placeholder="Search a Person in Star Wars World"
-        />
-      </FormGroup>
-    </Col>
+    <Row>
+      <Col xs="12">
+        <FormGroup>
+          <Input
+            onChange={e => {
+              setSearchTerm(e.target.value);
+              setPage(1);
+            }}
+            value={searchTerm}
+            type="search"
+            name="search"
+            id="exampleSearch"
+            placeholder="Search a Person in Star Wars World"
+          />
+        </FormGroup>
+      </Col>
+    </Row>
   );
 };
 

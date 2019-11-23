@@ -1,24 +1,18 @@
 import React from "react";
-import {
-  Col,
-  Card,
-  CardText,
-  CardBody,
-  CardHeader,
-  CardSubtitle
-} from "reactstrap";
+import { Col, Card, CardText, CardBody, CardHeader } from "reactstrap";
 
 const Person = ({ data }) => {
+  const { name, gender, hair_color, skin_color, height, mass } = data;
   return (
     <Col xs="12" sm="6" lg="2.4" className="mb-3">
       <Card>
-        <CardHeader>{data.name}</CardHeader>
+        <CardHeader>{name}</CardHeader>
         <CardBody>
-          <CardSubtitle>Gender: {data.gender}</CardSubtitle>
-          <CardText>Hair: {data.hair_color}</CardText>
-          <CardText>Skin: {data.skin_color}</CardText>
-          <CardText>Height: {data.height} cm</CardText>
-          <CardText>Mass: {data.mass} kg</CardText>
+          <CardText>Gender: {gender}</CardText>
+          <CardText>Hair: {hair_color}</CardText>
+          <CardText>Skin: {skin_color}</CardText>
+          <CardText>Height: {height} cm</CardText>
+          <CardText>Mass: {mass} kg</CardText>
         </CardBody>
       </Card>
     </Col>
