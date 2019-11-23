@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, FormGroup, Input } from "reactstrap";
-const SearchBar = ({ searchTerm, setSearchTerm, setPage }) => {
+const SearchBar = ({ searchTerm, setSearchTerm, setPage, setLoading }) => {
   return (
     <Row>
       <Col xs="12">
@@ -9,6 +9,7 @@ const SearchBar = ({ searchTerm, setSearchTerm, setPage }) => {
             onChange={e => {
               setSearchTerm(e.target.value);
               setPage(1);
+              setLoading(true);
             }}
             value={searchTerm}
             type="search"

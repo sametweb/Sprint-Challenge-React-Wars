@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, ButtonGroup, Button } from "reactstrap";
 
-const Pagination = ({ page, totalPage, setPage }) => {
+const Pagination = ({ page, totalPage, setPage, setLoading }) => {
   return totalPage === 1 ? null : (
     <Row>
       <Col xs="12" className="mb-3">
@@ -9,7 +9,10 @@ const Pagination = ({ page, totalPage, setPage }) => {
           <Button
             color="primary"
             disabled={!page || page === 1 ? true : false}
-            onClick={() => setPage(page - 1)}
+            onClick={() => {
+              setPage(page - 1);
+              setLoading(true);
+            }}
           >
             &larr; Previous Page
           </Button>
@@ -20,7 +23,10 @@ const Pagination = ({ page, totalPage, setPage }) => {
                 key={index}
                 color="primary"
                 outline={index + 1 === page ? false : true}
-                onClick={() => setPage(index + 1)}
+                onClick={() => {
+                  setPage(index + 1);
+                  setLoading(true);
+                }}
               >
                 {index + 1}
               </Button>
@@ -28,7 +34,10 @@ const Pagination = ({ page, totalPage, setPage }) => {
           <Button
             color="primary"
             disabled={!page || page >= totalPage ? true : false}
-            onClick={() => setPage(page + 1)}
+            onClick={() => {
+              setPage(page + 1);
+              setLoading(true);
+            }}
           >
             Next Page &rarr;
           </Button>

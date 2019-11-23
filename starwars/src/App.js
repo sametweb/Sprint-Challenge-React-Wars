@@ -6,12 +6,13 @@ import SearchBar from "./components/SearchBar";
 import ResultAlert from "./components/ResultAlert";
 import Pagination from "./components/Pagination";
 import Person from "./components/Person";
-import { Container, Row } from "reactstrap";
+import { Container, Row, Col, Spinner } from "reactstrap";
 
 const App = () => {
   const [people, setPeople] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const query = `https://swapi.co/api/people/?page=${page}&search=${searchTerm}`;
   const totalPage = people.count && Math.ceil(people.count / 10);
@@ -22,6 +23,7 @@ const App = () => {
       .then(response => {
         console.log("Component Did Mount");
         setPeople(response.data);
+        setLoading(false);
       })
       .catch(error => console.log(error));
   };
@@ -36,15 +38,33 @@ const App = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           setPage={setPage}
+          setLoading={setLoading}
         />
         <ResultAlert count={people.count} />
-        <Pagination totalPage={totalPage} page={page} setPage={setPage} />
-        <Row>
-          {people.results &&
-            people.results.map((item, index) => (
-              <Person key={index} data={item} />
-            ))}
-        </Row>
+        <Pagination
+          totalPage={totalPage}
+          page={page}
+          setPage={setPage}
+          setLoading={setLoading}
+        />
+        {loading ? (
+          <Row>
+            <Col xs="12">
+              <Spinner
+                type="grow"
+                color="primary"
+                style={{ width: "50px", height: "50px" }}
+              />
+            </Col>
+          </Row>
+        ) : (
+          <Row>
+            {people.results &&
+              people.results.map((item, index) => (
+                <Person key={index} data={item} />
+              ))}
+          </Row>
+        )}
       </Container>
     </div>
   );
