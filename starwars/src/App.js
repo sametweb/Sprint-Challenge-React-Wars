@@ -36,10 +36,12 @@ const App = () => {
       <Header />
       <Container>
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} setPage={setPage} setLoading={setLoading} />
-        <ResultAlert count={people.count} />
         <Pagination totalPage={totalPage} page={page} setPage={setPage} setLoading={setLoading} />
         {loading ? ( <LoadingSpinner /> ) : (
-          <Row>{people.results && people.results.map((item, index) => ( <Person key={index} data={item} /> ))}</Row>
+          <div>
+            <ResultAlert count={people.count} />
+            <Row>{people.results && people.results.map((item, index) => ( <Person key={index} data={item} /> ))}</Row>
+          </div>
         )}
       </Container>
     </div>
