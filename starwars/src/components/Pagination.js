@@ -5,7 +5,7 @@ const Pagination = ({ page, totalPage, setPage, setLoading }) => {
   return totalPage === 1 ? null : (
     <Row>
       <Col xs="12" className="mb-3">
-        <ButtonGroup>
+        <ButtonGroup size="sm">
           <Button
             color="primary"
             disabled={!page || page === 1 ? true : false}
@@ -14,7 +14,7 @@ const Pagination = ({ page, totalPage, setPage, setLoading }) => {
               setLoading(true);
             }}
           >
-            &larr; Previous Page
+            &larr;
           </Button>
           {Array(totalPage)
             .fill(0)
@@ -39,7 +39,7 @@ const Pagination = ({ page, totalPage, setPage, setLoading }) => {
               setLoading(true);
             }}
           >
-            Next Page &rarr;
+            &rarr;
           </Button>
         </ButtonGroup>
       </Col>

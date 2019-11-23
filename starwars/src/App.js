@@ -15,14 +15,13 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  const query = `https://swapi.co/api/people/?page=${page}&search=${searchTerm}`;
   const totalPage = people.count && Math.ceil(people.count / 10);
+  const query = `https://swapi.co/api/people/?page=${page}&search=${searchTerm}`;
 
   const requestAPI = () => {
     axios
       .get(query)
       .then(response => {
-        console.log("Component Did Mount");
         setPeople(response.data);
         setLoading(false);
       })
@@ -32,31 +31,15 @@ const App = () => {
   useEffect(requestAPI, [searchTerm, page]);
 
   return (
+    //prettier-ignore
     <div className="App">
       <Header />
       <Container>
-        <SearchBar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          setPage={setPage}
-          setLoading={setLoading}
-        />
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} setPage={setPage} setLoading={setLoading} />
         <ResultAlert count={people.count} />
-        <Pagination
-          totalPage={totalPage}
-          page={page}
-          setPage={setPage}
-          setLoading={setLoading}
-        />
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-          <Row>
-            {people.results &&
-              people.results.map((item, index) => (
-                <Person key={index} data={item} />
-              ))}
-          </Row>
+        <Pagination totalPage={totalPage} page={page} setPage={setPage} setLoading={setLoading} />
+        {loading ? ( <LoadingSpinner /> ) : (
+          <Row>{people.results && people.results.map((item, index) => ( <Person key={index} data={item} /> ))}</Row>
         )}
       </Container>
     </div>
