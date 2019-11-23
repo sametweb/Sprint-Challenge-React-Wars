@@ -1,20 +1,27 @@
 import React from "react";
+import {
+  Col,
+  Card,
+  CardText,
+  CardBody,
+  CardHeader,
+  CardSubtitle
+} from "reactstrap";
 
 const Person = ({ data }) => {
-  console.log(data);
   return (
-    <div className="Person">
-      <h2>{data.name}</h2>
-      <p>Gender: {data.gender}</p>
-      <p>
-        <span>Hair: {data.hair_color}</span>
-        <span>Skin: {data.skin_color}</span>
-      </p>
-      <p>
-        <span>Height: {data.height} cm</span>
-        <span>Mass: {data.mass} kg</span>
-      </p>
-    </div>
+    <Col xs="12" sm="6" lg="2.4" className="mb-3">
+      <Card>
+        <CardHeader>{data.name}</CardHeader>
+        <CardBody>
+          <CardSubtitle>Gender: {data.gender}</CardSubtitle>
+          <CardText>Hair: {data.hair_color}</CardText>
+          <CardText>Skin: {data.skin_color}</CardText>
+          <CardText>Height: {data.height} cm</CardText>
+          <CardText>Mass: {data.mass} kg</CardText>
+        </CardBody>
+      </Card>
+    </Col>
   );
 };
 
