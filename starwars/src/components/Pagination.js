@@ -3,7 +3,7 @@ import { ButtonGroup, Button } from "reactstrap";
 
 const Pagination = props => {
   console.log(props);
-  return (
+  return props.totalPage === 1 ? null : (
     <ButtonGroup>
       <Button
         color="primary"
